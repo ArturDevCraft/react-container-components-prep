@@ -1,9 +1,9 @@
 import React from 'react';
 import Counter from '../components/Counter';
 import withLoader from '../hoc/withLoader';
+import withOpacity from '../hoc/withOpacity';
 
 const CounterWithLoader = withLoader('Loading')(Counter);
-
 export class CounterContainer extends React.Component {
 	state = { clicksNumber: 0, isLoaded: false };
 	increment = () => {
@@ -20,14 +20,21 @@ export class CounterContainer extends React.Component {
 		clearTimeout(this.id);
 	}
 	render() {
+		const CounterWithOpacity = withOpacity(0.1, 5)(Counter);
 		return (
-			<CounterWithLoader
-				isLoaded={this.state.isLoaded}
+			// <CounterWithLoader
+			// 	isLoaded={this.state.isLoaded}
+			// 	onIncrement={this.increment}
+			// 	clicksNumber={this.state.clicksNumber}
+			// >
+			// 	{this.state.clicksNumber}
+			// </CounterWithLoader>
+			<CounterWithOpacity
 				onIncrement={this.increment}
 				clicksNumber={this.state.clicksNumber}
 			>
 				{this.state.clicksNumber}
-			</CounterWithLoader>
+			</CounterWithOpacity>
 		);
 	}
 }
